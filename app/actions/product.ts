@@ -16,7 +16,7 @@ export async function fetchProductsForSearch() {
       title: p.name,
       price: p.retailPrice,
       originalPrice: p.retailPrice, // Or calculate if you have discounts
-      category: p.category.name,
+      category: p.category?.name ?? 'Uncategorised',
       rating: 5, // Default placeholder
       images: p.imageUrls,
       stock: p.stockLevel,
