@@ -148,11 +148,9 @@ export default function BulkUploadModal({ onClose }: { onClose: () => void }) {
                         )}
                     </div>
 
-                    {/* Image URL note */}
-                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-xs text-white/50 leading-relaxed space-y-1">
-                        <p><span className="text-amber-400 font-semibold">📷 Images via CSV:</span> Add an <span className="font-mono text-white/70">Image URLs</span> column to your CSV.</p>
-                        <p>Separate multiple images with a pipe: <span className="font-mono text-brand-green">url1|url2|url3</span></p>
-                        <p className="text-white/30">Leave the column empty to skip — existing images won't be overwritten on update.</p>
+                    {/* Post-import note */}
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-xs text-white/50 leading-relaxed">
+                        <span className="text-white/70 font-semibold">📷 Adding photos:</span> After importing, click the <span className="text-brand-green font-semibold">Edit (✏️)</span> button on any product to upload its photos.
                     </div>
 
                 </div>

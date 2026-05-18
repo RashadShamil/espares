@@ -53,11 +53,6 @@ export async function POST(request: Request) {
             });
           }
 
-          // Parse pipe-separated image URLs e.g. "url1|url2|url3"
-          const imageUrls: string[] = row['Image URLs']
-            ? String(row['Image URLs']).split('|').map((u: string) => u.trim()).filter(Boolean)
-            : [];
-
           // Upsert product by SKU
           await tx.product.upsert({
             where: { sku: row['SKU'].toString().trim() },
@@ -71,8 +66,6 @@ export async function POST(request: Request) {
               brandId: brand.id,
               categoryId: category.id,
               subCategoryId: subCategory.id,
-              // Only overwrite images if new ones were provided in this row
-              ...(imageUrls.length > 0 && { imageUrls }),
             },
             create: {
               name: row['Product Name'].trim(),
@@ -85,7 +78,7 @@ export async function POST(request: Request) {
               brandId: brand.id,
               categoryId: category.id,
               subCategoryId: subCategory.id,
-              imageUrls,
+              imageUrls: [],
             },
           });
 
