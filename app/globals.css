@@ -1,26 +1,132 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-green:      #2D6A4F;
+  --brand-green-dark: #1F4D38;
+  --brand-gold:       #C8963E;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─── Base ─── */
+*, *::before, *::after { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #111916;
+  background: #F7F8F6;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F7F8F6; }
+::-webkit-scrollbar-thumb { background: #C2CFC8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #9BB0A5; }
+
+/* ─── Glass utilities ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Footer dark glass — refined charcoal, not pitch black */
+.glass-dark {
+  background: rgba(28, 43, 34, 0.82);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ─── Mono utility ─── */
+.font-mono-tech {
+  font-family: var(--font-roboto-mono), 'Roboto Mono', 'Courier New', monospace;
+}
+
+/* ─── Skeleton shimmer ─── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #e8ede9 25%, #d4ddd6 50%, #e8ede9 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: 6px;
+}
+
+/* ─── Scan line animation ─── */
+@keyframes scan-line {
+  0%   { top: 0%; opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.animate-scan { animation: scan-line 2s linear infinite; }
+
+/* ─── Price lock blur ─── */
+.price-locked {
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+  transition: filter 0.3s ease;
+}
+
+/* ─── Subtle HUD grid (footer / hero) ─── */
+.bg-hud {
+  background-image:
+    linear-gradient(rgba(45,106,79,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,106,79,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─── Auth page diagonal split bg ─── */
+.auth-split-bg {
+  background: linear-gradient(135deg, #1F4D38 0%, #2D6A4F 50%, #3A8263 100%);
+}
+
+/* ─── Form input base style ─── */
+.input-base {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  border: 1.5px solid #D1D9D5;
+  background: #FAFBFA;
+  color: #111916;
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.input-base::placeholder { color: #9DAAA3; }
+.input-base:focus {
+  border-color: #2D6A4F;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.1);
+}
+
+/* ─── Auth card entry animation ─── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.auth-card-enter {
+  animation: slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─── Step indicator ─── */
+.step-dot {
+  width: 8px; height: 8px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.25);
+  transition: all 0.3s ease;
+}
+.step-dot.active {
+  width: 24px;
+  background: #fff;
 }

@@ -1,0 +1,4 @@
+Product Name,SKU,Serial Number,Brand,Category,SubCategory,Description,Retail Price,Wholesale Price,Stock Level,Image URLs
+Samsung Washing Machine Motor,SKU-001,WM-MOT-001,Samsung,Washing Machine,Motors,Original OEM motor for Samsung front-load washing machines,4500,3200,10,https://example.com/img1.jpg|https://example.com/img2.jpg
+LG AC Compressor,SKU-002,AC-CMP-002,LG,Air Conditioner,Compressors,Genuine LG inverter AC compressor for 1.5 ton units,18000,13500,5,https://example.com/ac-compressor.jpg
+Generic Fridge Thermostat,SKU-003,,Generic/Universal,Refrigerator,Thermostats,Universal thermostat compatible with most direct-cool refrigerators,1200,850,25,
