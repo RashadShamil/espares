@@ -4,18 +4,17 @@ import HeroBanner from '@/components/home/HeroBanner';
 import FeaturesStrip from '@/components/home/FeaturesStrip';
 import CategoryBento from '@/components/home/CategoryBento';
 import ParallaxBackground from '@/components/ParallaxBackground';
-
 import ProductCard from '@/components/product/ProductCard';
 import Link from 'next/link';
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 async function getFeaturedProducts() {
   try {
-    const products = await prisma.product.findMany({
+    return await prisma.product.findMany({
       take: 8,
       orderBy: { createdAt: 'desc' },
-      include: { category: true }
+      include: { category: true },
     });
-    return products;
   } catch {
     return [];
   }
@@ -27,7 +26,7 @@ export default async function Home() {
   return (
     <main className="relative min-h-screen z-0 bg-transparent">
 
-      {/* --- GLOBAL PARALLAX BACKGROUND --- */}
+      {/* Global parallax background */}
       <ParallaxBackground />
 
       {/* ── Hero + Sidebar ── */}
@@ -54,19 +53,15 @@ export default async function Home() {
       <section className="max-w-7xl mx-auto px-4 pb-20">
         <div className="flex justify-between items-end mb-8">
           <div>
-            <p className="text-xs font-mono-tech text-brand-green font-semibold uppercase tracking-[0.2em] mb-1.5">
+            <p className="text-xs font-mono text-brand-green font-semibold uppercase tracking-[0.2em] mb-1.5">
               Fresh Stock
             </p>
             <h2 className="text-2xl font-bold text-brand-ink tracking-tight">Latest Arrivals</h2>
           </div>
-          <Link
-            href="/search"
-            className="group flex items-center gap-1.5 text-sm font-semibold text-brand-green hover:text-brand-ink transition-colors"
-          >
+          <Link href="/search"
+            className="group flex items-center gap-1.5 text-sm font-semibold text-brand-green hover:text-brand-ink transition-colors">
             View All
-            <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
-            </svg>
+            <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
 
@@ -87,7 +82,6 @@ export default async function Home() {
             ))}
           </div>
         ) : (
-          /* Empty state — shown before data is seeded */
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
@@ -95,7 +89,6 @@ export default async function Home() {
                 <div className="p-4 space-y-2">
                   <div className="skeleton h-3 w-2/3 rounded" />
                   <div className="skeleton h-4 w-full rounded" />
-                  <div className="skeleton h-4 w-3/4 rounded" />
                   <div className="skeleton h-5 w-1/2 rounded mt-2" />
                 </div>
               </div>
